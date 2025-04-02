@@ -37,8 +37,6 @@ contract StudyTracker {
     uint256 EndingTime;
     uint256 SessionLength;
 
-    mapping(uint256 => uint256) public studyIndextoSessionLength;
-
     function startTimer() public onlyOwner timerOff returns (uint256) {
         StartingTime = block.timestamp;
         ClockState = true;
