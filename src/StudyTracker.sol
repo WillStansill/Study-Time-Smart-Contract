@@ -1,13 +1,13 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.29;
-
-error NotOwner();
-error ClockNotRunning();
-error ClockStillRunning();
-error InvalidIndex();
+pragma solidity 0.8.28;
 
 contract StudyTracker {
+    error NotOwner();
+    error ClockNotRunning();
+    error ClockStillRunning();
+    error InvalidIndex();
+
     address owner = msg.sender;
 
     modifier onlyOwner() {
@@ -30,12 +30,11 @@ contract StudyTracker {
         _;
     }
 
-    uint256[] studySessions;
+    uint256[] public studySessions;
 
-    bool ClockState = false;
-    uint256 StartingTime;
-    uint256 EndingTime;
-    uint256 SessionLength;
+    bool public ClockState = false;
+    uint256 public StartingTime;
+    uint256 public EndingTime;
 
     function startTimer() public onlyOwner timerOff returns (uint256) {
         StartingTime = block.timestamp;
@@ -82,5 +81,21 @@ contract StudyTracker {
 
     function getTimerState() public view returns (bool timerState) {
         return ClockState;
+    }
+
+    function getCurrentTime() public view returns (uint256) {
+        if (ClockState == true) {
+            return block.timestamp - StartingTime;
+        } else {
+            return EndingTime - StartingTime;
+        }
+    }
+
+    function getNumberOfStudySessions() public view returns (uint256) {
+        return studySessions.length;
+    }
+
+    function getOwner() public view returns (address) {
+        return owner;
     }
 }

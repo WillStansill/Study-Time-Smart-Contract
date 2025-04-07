@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.29;
+pragma solidity 0.8.28;
 
 import {Script} from "../lib/forge-std/src/Script.sol";
 import {StudyTracker} from "../src/StudyTracker.sol";
